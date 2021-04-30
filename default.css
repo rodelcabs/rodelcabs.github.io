@@ -2,13 +2,11 @@
   --mainColor: #181d24;
   --secondaryColor: #11151b;
 
-  /* --mainColor: #181d24;
-  --secondaryColor: #29323d; */
-
   --borderColor: #c1c1c1;
 
   --mainText: #c0bfbe;
   --secondaryText: #a2a3a3;
+  --introText:  #c0bfbe;
   --icon: #4a5e62;
 
   --themeDotBorder: #313131;
@@ -152,22 +150,22 @@ li {
 }
 
 .pre-info p {
-  color: var(--mainText);
+  color: var(--introText);
 }
 
 .contact-btn {
-  color: var(--mainText);
+  color: var(--introText);
   text-transform: uppercase;
   text-decoration: none;
   background: transparent;
   padding: 10px;
-  border: 2px solid var(--mainText);
+  border: 2px solid var(--introText);
   display: inline-block;
   transition: all 0.4s ease 0s;
 }
 
 .contact-btn:hover {
-  color: var(--mainText);
+  color: var(--introText);
   background: var(--icon);
   border-color: var(--icon);
   transition: all 0.4s ease 0s;
@@ -199,7 +197,7 @@ li {
 
 .greeting > h1 {
   margin: 0;
-  color: var(--mainText);
+  color: var(--introText);
 }
 
 .left-column {
