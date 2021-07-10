@@ -80,6 +80,7 @@
     }
 
     .skill-list{
+        gap: 0;
         justify-content: space-evenly;
     }
 
