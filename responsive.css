@@ -98,6 +98,7 @@
 
     .sub-skill{
         text-align: left;
+        margin-right: auto;
     }
 
     .about-wrapper{
@@ -160,7 +161,7 @@
         /* transition: box-shadow 0.3s ease-in-out; */
     
         border: var(--color-3) 2px solid;
-        padding: 2em;
+        padding: 1em;
         width: 100%;
         margin-right: 0;
     }
