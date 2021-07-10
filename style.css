@@ -185,7 +185,7 @@ svg{
 
 .skill-list{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .pill{

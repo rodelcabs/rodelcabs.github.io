@@ -80,7 +80,7 @@
     }
 
     .skill-list{
-        justify-content: space-between;
+        justify-content: space-evenly;
     }
 
     .skill-svg{
