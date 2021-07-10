@@ -180,12 +180,11 @@ svg{
 .skills-content{
     margin-top: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .skill-list{
     display: flex;
-    gap: 5%;
     justify-content: space-between;
 }
 
@@ -202,6 +201,7 @@ svg{
     -o-transition: 0.5s;
     transition: 0.5s;
     box-shadow: inset 0 0 0 0 var(--color-4);
+    margin: 0;
 }
 
 .pill:hover{
