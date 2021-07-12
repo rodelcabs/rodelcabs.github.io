@@ -178,4 +178,8 @@
     .footer-wrapper{
         flex-direction: column;
     }
+
+    .projects-box-wrapper{
+        margin-bottom: 2em;
+    }
 }
