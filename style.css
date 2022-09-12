@@ -278,6 +278,7 @@ body{
     border-radius: 6px;
     font-family: var(--font-reg);
     font-size: var(--font-size);
+    cursor: pointer;
  
     /* shadow */
     -webkit-box-shadow: 1px 9px 29px -10px rgba(199,199,199,1);
