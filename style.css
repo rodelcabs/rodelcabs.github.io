@@ -26,9 +26,10 @@
     --secondary-font: #686868;
     --font-reg: "Montserrat Regular";
     --font-light: "Montserrat Light";
-    --font-size: 13px;
+    --font-size: 14px;
     --font-size-head: 2em;
     --font-size-small: 11.24px;
+    --icon-size: 1.6em
 }
 
 a,p,span,li{
@@ -68,13 +69,13 @@ body{
 }
 .buttons{
     padding: 3px;
-    font-size: 1.3em;
     display: flex;
     gap: 10px;
 }
 
 .buttons a {
     padding: 10px;
+    font-size: 1.4em;
 }
 
 .profile{
@@ -208,7 +209,7 @@ body{
     margin: 10px;
 }
 .hard-skills-menu .hard-skills-list ul li i{
-    font-size: 1.5em;
+    font-size: var(--icon-size);
     margin-right: 10px;
 }
 
@@ -301,7 +302,6 @@ body{
 }
 
 .project-list .project .project-title i {
-    margin-left: 5px;
     -moz-transition: all 0.5s linear;
     -webkit-transition: all 0.5s linear;
     -o-transition: all 0.5s linear;
@@ -312,7 +312,7 @@ body{
 .project-list .project .project-languages{
     display: flex;
     gap: 5px;
-    font-size: 1.5em;
+    font-size: var(--icon-size);
 }
 
 @media screen {
