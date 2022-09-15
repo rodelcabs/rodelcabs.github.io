@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
@@ -13,11 +16,13 @@
     <div class="container">
         <div class="actions">
             <div class="buttons">
-                <a href="mailto:cabubas27rodel@gmail.com" title="Send me a message!">
-                    <i class="fa-regular fa-envelope-open"></i>
-                </a>
-                <a href="#">
+                <a class="dropdown-button" href="#">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
+                    <div class="dropdown-content">
+                        <a href="mailto:cabubas27rodel@gmail.com" title="Send me a message!">
+                            <i class="fa-regular fa-envelope-open"></i>
+                        </a>
+                    </div>
                 </a>
             </div>
         </div>
@@ -436,6 +441,29 @@
                 </div>
             </div>
         </section>
+        <div class="footer">
+            <div class="footer-wrapper">
+                <div class="details">
+                    <h2 class="name">Rodel <br> Cabubas</h2>
+                    <p class="region">Metro Manila, Philippines</p>
+                    <p class="copyright">&copy; <script>document.write(/\d{4}/.exec(Date())[0])</script> All Rights Reserved </p>
+                </div>
+                <div class="links">
+                    <ul>
+                        <li>
+                            <a href="https://github.com/rodelcabs" target="_blank" class="footer-link github">
+                                <i class="devicon-github-original colored"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://linkedin.com/in/rodel-cabubas" target="_blank" class="footer-link">
+                                <i class="devicon-linkedin-plain colored"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 <script src="script.js"></script>
