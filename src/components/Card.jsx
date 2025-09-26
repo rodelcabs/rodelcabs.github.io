@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
-export default function Card ({title, threshold, current = 0, onClick}) {
+const Card = memo(function Card ({title, threshold, current = 0, onClick}) {
     // Calculate percentage (currentValue / thresholdValue) * 100
     const percentage = threshold > 0 ? Math.min((current / threshold) * 100, 100) : 0;
     const remaining = Math.max(threshold - current, 0);
@@ -39,4 +39,6 @@ export default function Card ({title, threshold, current = 0, onClick}) {
             </div>
         </div>
     )
-}
+});
+
+export default Card;

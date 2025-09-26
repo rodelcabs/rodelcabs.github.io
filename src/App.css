@@ -7,6 +7,8 @@
   --progress-orange: #fb923c;
   --progress-red: #f87171;
   --progress-bg: #e5e7eb;
+  /* Custom viewport height for mobile keyboard handling */
+  --vh: 1vh;
 }
 .App {
   font-family: Lexend Deca, sans-serif;
@@ -16,6 +18,34 @@
   margin: 10px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 20px; /* Adjust distance from the bottom */
+  right: 20px; /* Adjust distance from the right */
+  z-index: 999; /* Ensure it stays on top of other elements */
+  
+  /* Button styling */
+  background-color: var(--progress-orange);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  font-size: 24px;
+  /* box-shadow: 0 4px 8px rgba(0,0,0,0.2); */
+  box-shadow: rgb(173, 104, 47) -5px 5px;
+}
+
+.modal-input-container > span {
+  padding: 10px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+  text-align: left;
+  width: 100%;
+  display: block;
 }
 
 .card {
@@ -28,7 +58,7 @@
   align-items: center;
   justify-content: flex-start;
   /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
-  box-shadow: var(--accent-color-2) -5px 5px;
+  box-shadow: var(--accent-color-2) 5px;
   cursor: pointer;
   transition: all 0.3s ease;
   background-color: #ffffff;
@@ -251,7 +281,7 @@
   }
   
   .card-container {
-    gap: 28px;
+    gap: 25px;
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -264,6 +294,13 @@
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100); /* Custom property fallback */
+  height: 100dvh; /* Dynamic viewport height for mobile keyboards */
+  min-height: 100vh; /* Fallback for browsers that don't support dvh */
+  min-height: 100dvh;
+  min-height: -webkit-fill-available; /* iOS Safari specific */
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
@@ -271,6 +308,12 @@
   z-index: 1000;
   padding: 20px;
   backdrop-filter: blur(4px);
+  overflow: hidden;
+  /* Ensure modal covers the entire screen including when keyboard is visible */
+  -webkit-overflow-scrolling: touch;
+  /* Force hardware acceleration for better performance */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .modal-content {
@@ -279,9 +322,13 @@
   max-width: 400px;
   width: 100%;
   max-height: 90vh;
+  max-height: 90dvh; /* Dynamic viewport height for mobile */
   overflow-y: auto;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   animation: modalSlideIn 0.3s ease-out;
+  position: relative;
+  /* Ensure modal content is properly positioned */
+  margin: auto;
 }
 
 .modal-header {
@@ -323,7 +370,7 @@
 }
 
 .modal-body {
-  padding: 20px;
+  padding: 10px;
 }
 
 .modal-input {
@@ -387,11 +434,25 @@
 @media (max-width: 430px) {
   .modal-overlay {
     padding: 10px;
+    /* Ensure overlay always covers full screen on mobile */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    min-height: -webkit-fill-available; /* iOS Safari fix */
   }
   
   .modal-content {
     border-radius: 8px;
     max-height: 85vh;
+    max-height: 85dvh;
+    /* Better mobile positioning when keyboard is visible */
+    margin: auto 0;
+    align-self: center;
   }
   
   .modal-header {
@@ -414,5 +475,160 @@
     width: 100%;
     padding: 18px 24px;
     font-size: 1.2rem;
+  }
+}
+
+/* Swipeable Card Styles */
+.swipeable-card-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.delete-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 20px;
+  border-radius: 15px;
+  z-index: 1;
+}
+
+.refresh-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
+  border-radius: 15px;
+  z-index: 1;
+}
+
+.delete-icon,
+.refresh-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-weight: 600;
+}
+
+.delete-icon span:first-child,
+.refresh-icon span:first-child {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.delete-text,
+.refresh-text {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.swipeable-card {
+  position: relative;
+  z-index: 2;
+  background: white;
+  border-radius: 15px;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.swipeable-card.dragging {
+  cursor: grabbing;
+  transition: none !important;
+}
+
+.swipeable-card.deleting {
+  opacity: 0.8;
+  transform: translateX(-300px) !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.swipeable-card.refreshing {
+  opacity: 0.9;
+  transform: translateX(300px) !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.swipe-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  z-index: 3;
+  animation: swipePulse 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.swipe-indicator.left {
+  right: 20px;
+  background: rgba(239, 68, 68, 0.9);
+}
+
+.swipe-indicator.right {
+  left: 20px;
+  background: rgba(16, 185, 129, 0.9);
+}
+
+@keyframes swipePulse {
+  0% { opacity: 0.7; transform: translateY(-50%) scale(0.95); }
+  100% { opacity: 1; transform: translateY(-50%) scale(1); }
+}
+
+/* Mobile optimizations for swipe */
+@media (max-width: 430px) {
+  .swipeable-card-container {
+    margin-bottom: 4px;
+  }
+  
+  .delete-background {
+    padding-left: 15px;
+  }
+  
+  .refresh-background {
+    padding-right: 15px;
+  }
+  
+  .delete-icon span:first-child,
+  .refresh-icon span:first-child {
+    font-size: 1.3rem;
+  }
+  
+  .delete-text,
+  .refresh-text {
+    font-size: 0.7rem;
+  }
+  
+  .swipe-indicator.left {
+    right: 15px;
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+  
+  .swipe-indicator.right {
+    left: 15px;
+    padding: 6px 10px;
+    font-size: 0.7rem;
   }
 }
