@@ -16,15 +16,12 @@ export default function Card ({title, threshold, current = 0, onClick}) {
         <div className="card" onClick={onClick}>
             <div className="card-content">
                 <div className="card-title">
-                    {title}
+                    <div>{title}</div>
+                    <div className="progress-percentage">{percentage.toFixed(0)}%</div>
                 </div>
                 
                 {/* Progress Bar */}
                 <div className="progress-container">
-                    <div className="progress-info">
-                        <span className="progress-text">{current.toLocaleString()} / {threshold.toLocaleString()}</span>
-                        <span className="progress-percentage">{percentage.toFixed(0)}%</span>
-                    </div>
                     <div className="progress-bar">
                         <div 
                             className="progress-fill" 
@@ -34,8 +31,9 @@ export default function Card ({title, threshold, current = 0, onClick}) {
                             }}
                         ></div>
                     </div>
-                    <div className="remaining-amount">
-                        Remaining: {remaining.toLocaleString()}
+                    <div className="progress-info">
+                        <span className="progress-text">{current.toLocaleString()} / {threshold.toLocaleString()}</span>
+                        <span className="remaining-amount">Remaining: {remaining.toLocaleString()}</span>
                     </div>
                 </div>
             </div>

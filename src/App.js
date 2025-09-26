@@ -14,10 +14,6 @@ function App() {
 
   useBudget(setBudget);
 
-  useEffect(() => {
-    console.log(budget)
-  }, [budget])
-
   const openModal = (cardTitle, currentValue, id) => {
     setSelectedCard(cardTitle);
     setSelectedThreshold(currentValue);
