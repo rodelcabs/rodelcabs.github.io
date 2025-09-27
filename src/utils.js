@@ -70,12 +70,13 @@ export const deleteBudget = async (id) => {
     try {
         const response = await axios.delete(`${apiUrl}/${id}`);
         if (response.status === 200 || response.status === 204) {
-            return true;
+            return response.data;
         } else {
             throw new Error('Failed to delete budget');
         }
     } catch (error) {
         console.error('Error deleting budget:', error);
+        toast.error('Failed to delete budget item');
         throw error;
     }
 }

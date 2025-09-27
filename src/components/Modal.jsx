@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { updateBudget, addBudget } from '../utils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+/* import all the icons in Free Solid, Free Regular, and Brands styles */
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+
+library.add(fas, far, fab)
 export function SpendModal({ isOpen, onClose, title, id, updateBudgetItem }) {
   const [inputValue, setInputValue] = useState('');
   
@@ -10,7 +19,7 @@ export function SpendModal({ isOpen, onClose, title, id, updateBudgetItem }) {
     }
   }, [isOpen]);
 
-  const handleSubmit = useCallback(async () => {
+  const handleSubmit = useCallback(async (isAdd = true) => {
     const newSpending = parseFloat(inputValue);
     
     if (isNaN(newSpending) || newSpending <= 0) {
@@ -24,15 +33,20 @@ export function SpendModal({ isOpen, onClose, title, id, updateBudgetItem }) {
     }
 
     try {
+      let newCurrentValue = newSpending;
       // Optimistic update - update local state immediately
-      updateBudgetItem(id, (prevItem) => ({
-        ...prevItem,
-        currentValue: (prevItem.currentValue || 0) + newSpending
-      }));
+      updateBudgetItem(id, (prevItem) => {
+        newCurrentValue = (prevItem.currentValue || 0) + (isAdd ? newSpending : -newSpending) 
+        newCurrentValue = newCurrentValue < 0 ? 0 : newCurrentValue
+        return {
+          ...prevItem,
+          currentValue: newCurrentValue
+        }
+      });
       
       // Update on server
-      await updateBudget(id, { currentValue: newSpending });
-      toast.success('Spending added successfully');
+      await updateBudget(id, { currentValue: newCurrentValue });
+      toast.success(isAdd ? 'Spending added' : 'Spending subtracted');
       onClose();
     } catch (error) {
       // Revert optimistic update by refetching data
@@ -68,8 +82,11 @@ export function SpendModal({ isOpen, onClose, title, id, updateBudgetItem }) {
           />
         </div>
         <div className="modal-footer">
-          <button className="modal-button" onClick={handleSubmit}>
-            Enter
+          <button className="modal-button minus-button" onClick={() => handleSubmit(false)}>
+            <FontAwesomeIcon icon="fa-solid fa-minus" />
+          </button>
+          <button className="modal-button" onClick={() => handleSubmit(true)}>
+            <FontAwesomeIcon icon="fa-solid fa-plus" />
           </button>
         </div>
       </div>
